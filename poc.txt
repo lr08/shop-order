@@ -1,0 +1,142 @@
+product.jsx
+
+// import React, { useState, useEffect } from "react";
+// import { fetchProducts, fetchInventory } from "../api"; 
+// import Customer from "./Customer";
+
+// function Products() {
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [invId, setInvId] = useState(0);
+//   const [show, setshow] = useState(false);
+//   useEffect(() => {
+//     const getProducts = async () => {
+//       try {
+//         const data = await fetchProducts();
+     
+//         setProducts(data);
+//         setError(null);
+//       } catch (err) {
+//         setError("Failed to fetch products");
+//         setProducts([]);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     getProducts();
+//   }, []);
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>{error}</p>;
+
+//   const handleClick = (productId) => {
+//     const getInventory = async () => {
+//       try {
+//         const data = await fetchInventory();
+//         for (let i = 0; i < data.data.length; i++) {
+//           if (data.data[i].productId === productId) {
+           
+//             setshow(true);
+//             setInvId(data.data[i].inventoryId);
+//           }
+//         }
+
+        
+//         setError(null);
+//       } catch (err) {
+//         setError("Failed to fetch products");
+    
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     getInventory();
+//   };
+//   return (
+//     <div>
+//       <h1>Product List</h1>
+//       {products.data.length > 0 ? (
+//         <ul>
+//           {products.data.map((p) => (
+//             <div>
+//               <li key={p.productId}>
+//                 {p.productName} {p.productDescription} {p.productPrice}{" "}
+//                 <button onClick={() => handleClick(p.productId)}>ADD</button>
+//               </li>
+//             </div>
+//           ))}
+//         </ul>
+//       ) : (
+//         <p>No products found.</p>
+//       )}
+//       {show && <Customer invId={invId} />}
+
+      
+//     </div>
+//   );
+// }
+
+// export default Products;
+
+
+customer.jsx
+ <form onSubmit={handleSubmit}>
+      <label>
+        Customer Email:
+        <input type="email" name="customerEmail" value={customerData.customerEmail} onChange={handleInputChange} />
+      </label>
+      <label>
+        Customer Name:
+        <input type="text" name="customerName" value={customerData.customerName} onChange={handleInputChange} />
+      </label>
+      {['customerBillingAddress', 'shippingAddress'].map((addressType) => (
+        <div key={addressType}>
+          <h3>{addressType === 'customerBillingAddress' ? 'Billing Address' : 'Shipping Address'}</h3>
+          <label>
+            Door No:
+            <input
+              type="text"
+              value={customerData[addressType].doorNo}
+              onChange={(e) => handleAddressChange(addressType, 'doorNo', e.target.value)}
+            />
+          </label>
+          <label>
+            Street:
+            <input
+              type="text"
+              value={customerData[addressType].street}
+              onChange={(e) => handleAddressChange(addressType, 'street', e.target.value)}
+            />
+          </label>
+          <label>
+            Layout:
+            <input
+              type="text"
+              value={customerData[addressType].layout}
+              onChange={(e) => handleAddressChange(addressType, 'layout', e.target.value)}
+            />
+          </label>
+          <label>
+            City:
+            <input
+              type="text"
+              value={customerData[addressType].city}
+              onChange={(e) => handleAddressChange(addressType, 'city', e.target.value)}
+            />
+          </label>
+          <label>
+            Pincode:
+            <input
+              type="number"
+              value={customerData[addressType].pincode}
+              onChange={(e) => handleAddressChange(addressType, 'pincode', e.target.value)}
+            />
+          </label>
+        </div>
+      ))}
+      <button type="submit">Create Customer</button>
+    </form>
+    <button type="submit" onClick={()=>handleOrder()}>Create Order</button>
